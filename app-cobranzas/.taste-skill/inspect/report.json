@@ -1,0 +1,836 @@
+{
+ "url": "http://localhost:5199/?preview=1",
+ "at": "2026-10-24T19:14:34.169Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 1,
+   "filled": [
+    0.32
+   ],
+   "motion": {
+    "elements": 2,
+    "css": 0,
+    "transitions": 2,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 900,
+     "screens": 1,
+     "words": 37,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 9,
+     "sections": 0,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": []
+    },
+    "hero": {
+     "text": "$ 0,00",
+     "words": 2,
+     "chars": 6,
+     "lines": 1,
+     "size": 56,
+     "vw": 3.9,
+     "font": "Manrope",
+     "weight": 800,
+     "tracking": -0.035,
+     "leading": 1.05,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "center",
+     "widthRatio": 0.41,
+     "top": 175,
+     "tag": "div",
+     "kind": "heading"
+    },
+    "h1": null,
+    "headings": [
+     {
+      "text": "$ 0,00",
+      "words": 2,
+      "chars": 6,
+      "lines": 1,
+      "size": 56,
+      "vw": 3.9,
+      "font": "Manrope",
+      "weight": 800,
+      "tracking": -0.035,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.41,
+      "top": 175,
+      "tag": "div",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 1,
+     "maxLines": 1,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Manrope",
+       "share": 1,
+       "mono": false
+      }
+     ],
+     "familyCount": 1,
+     "sizes": [
+      11,
+      12,
+      13,
+      16,
+      17,
+      18,
+      56
+     ],
+     "sizeCount": 7,
+     "notLoaded": [],
+     "body": null,
+     "measureChars": null,
+     "max": {
+      "size": 56,
+      "vw": 3.9,
+      "font": "Manrope",
+      "text": "$ 0,00"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 1,
+     "microLabelShare": 0.014,
+     "microSamples": [
+      "OCA"
+     ],
+     "upperShare": 0.01,
+     "centerShare": 0.05,
+     "smallText": 1
+    },
+    "eyebrows": [
+     {
+      "text": "Total cobrado",
+      "above": "$ 0,00",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 13,
+      "top": 152
+     }
+    ],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f6f3f9",
+     "bodyBgHsl": {
+      "h": 270,
+      "s": 0.33,
+      "l": 0.96
+     },
+     "dark": false,
+     "sectionBgs": [],
+     "textColors": [
+      {
+       "color": "#77688a",
+       "share": 0.47
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.27
+      },
+      {
+       "color": "#261634",
+       "share": 0.2
+      },
+      {
+       "color": "#381a04",
+       "share": 0.05
+      },
+      {
+       "color": "#3a1b05",
+       "share": 0.01
+      }
+     ],
+     "button": {
+      "bg": "#f39430",
+      "hsl": {
+       "h": 31,
+       "s": 0.89,
+       "l": 0.57
+      },
+      "fg": "#381a04"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 1,
+     "inHero": 1,
+     "radius": 16,
+     "height": 56,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Nuevo cobro"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 1,
+     "hairlineSamples": [
+      "div.hero-stats 592px"
+     ],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 1,
+     "roundedBoxes": 2,
+     "boxRadius": 28,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 0,
+     "fixed": true,
+     "height": 64,
+     "floatingPill": false,
+     "blur": true
+    },
+    "fontsLoaded": [
+     "manrope"
+    ]
+   },
+   "consoleErrors": []
+  },
+  {
+   "width": 768,
+   "height": 1024,
+   "load": "load",
+   "screens": 1,
+   "filled": [
+    0.52
+   ],
+   "motion": {
+    "elements": 2,
+    "css": 0,
+    "transitions": 2,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "page": {
+     "height": 1024,
+     "screens": 1,
+     "words": 37,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 9,
+     "sections": 0,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": []
+    },
+    "hero": {
+     "text": "$ 0,00",
+     "words": 2,
+     "chars": 6,
+     "lines": 1,
+     "size": 52,
+     "vw": 6.8,
+     "font": "Manrope",
+     "weight": 800,
+     "tracking": -0.035,
+     "leading": 1.05,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "center",
+     "widthRatio": 0.71,
+     "top": 161,
+     "tag": "div",
+     "kind": "heading"
+    },
+    "h1": null,
+    "headings": [
+     {
+      "text": "$ 0,00",
+      "words": 2,
+      "chars": 6,
+      "lines": 1,
+      "size": 52,
+      "vw": 6.8,
+      "font": "Manrope",
+      "weight": 800,
+      "tracking": -0.035,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.71,
+      "top": 161,
+      "tag": "div",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 1,
+     "maxLines": 1,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Manrope",
+       "share": 1,
+       "mono": false
+      }
+     ],
+     "familyCount": 1,
+     "sizes": [
+      11,
+      12,
+      13,
+      16,
+      17,
+      18,
+      52
+     ],
+     "sizeCount": 7,
+     "notLoaded": [],
+     "body": null,
+     "measureChars": null,
+     "max": {
+      "size": 52,
+      "vw": 6.8,
+      "font": "Manrope",
+      "text": "$ 0,00"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 1,
+     "microLabelShare": 0.014,
+     "microSamples": [
+      "OCA"
+     ],
+     "upperShare": 0.01,
+     "centerShare": 0.05,
+     "smallText": 1
+    },
+    "eyebrows": [
+     {
+      "text": "Total cobrado",
+      "above": "$ 0,00",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 13,
+      "top": 138
+     }
+    ],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f6f3f9",
+     "bodyBgHsl": {
+      "h": 270,
+      "s": 0.33,
+      "l": 0.96
+     },
+     "dark": false,
+     "sectionBgs": [],
+     "textColors": [
+      {
+       "color": "#77688a",
+       "share": 0.47
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.27
+      },
+      {
+       "color": "#261634",
+       "share": 0.2
+      },
+      {
+       "color": "#381a04",
+       "share": 0.05
+      },
+      {
+       "color": "#3a1b05",
+       "share": 0.01
+      }
+     ],
+     "button": {
+      "bg": "#f39430",
+      "hsl": {
+       "h": 31,
+       "s": 0.89,
+       "l": 0.57
+      },
+      "fg": "#381a04"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 1,
+     "inHero": 1,
+     "radius": 16,
+     "height": 56,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Nuevo cobro"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 1,
+     "hairlineSamples": [
+      "div.hero-stats 544px"
+     ],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 1,
+     "roundedBoxes": 2,
+     "boxRadius": 24,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 0,
+     "fixed": true,
+     "height": 64,
+     "floatingPill": false,
+     "blur": true
+    },
+    "fontsLoaded": [
+     "manrope"
+    ]
+   },
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 1,
+   "filled": [
+    0.56
+   ],
+   "motion": {
+    "elements": 2,
+    "css": 0,
+    "transitions": 2,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 844,
+     "screens": 1,
+     "words": 37,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 9,
+     "sections": 0,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": []
+    },
+    "hero": {
+     "text": "$ 0,00",
+     "words": 2,
+     "chars": 6,
+     "lines": 1,
+     "size": 41,
+     "vw": 10.5,
+     "font": "Manrope",
+     "weight": 800,
+     "tracking": -0.035,
+     "leading": 1.05,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "center",
+     "widthRatio": 0.81,
+     "top": 161,
+     "tag": "div",
+     "kind": "heading"
+    },
+    "h1": null,
+    "headings": [
+     {
+      "text": "$ 0,00",
+      "words": 2,
+      "chars": 6,
+      "lines": 1,
+      "size": 41,
+      "vw": 10.5,
+      "font": "Manrope",
+      "weight": 800,
+      "tracking": -0.035,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.81,
+      "top": 161,
+      "tag": "div",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 1,
+     "maxLines": 1,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Manrope",
+       "share": 1,
+       "mono": false
+      }
+     ],
+     "familyCount": 1,
+     "sizes": [
+      11,
+      12,
+      13,
+      16,
+      17,
+      18,
+      41
+     ],
+     "sizeCount": 7,
+     "notLoaded": [],
+     "body": null,
+     "measureChars": null,
+     "max": {
+      "size": 41,
+      "vw": 10.5,
+      "font": "Manrope",
+      "text": "$ 0,00"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 1,
+     "microLabelShare": 0.014,
+     "microSamples": [
+      "OCA"
+     ],
+     "upperShare": 0.01,
+     "centerShare": 0.05,
+     "smallText": 1
+    },
+    "eyebrows": [
+     {
+      "text": "Total cobrado",
+      "above": "$ 0,00",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 13,
+      "top": 138
+     }
+    ],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f6f3f9",
+     "bodyBgHsl": {
+      "h": 270,
+      "s": 0.33,
+      "l": 0.96
+     },
+     "dark": false,
+     "sectionBgs": [],
+     "textColors": [
+      {
+       "color": "#77688a",
+       "share": 0.47
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.27
+      },
+      {
+       "color": "#261634",
+       "share": 0.2
+      },
+      {
+       "color": "#381a04",
+       "share": 0.05
+      },
+      {
+       "color": "#3a1b05",
+       "share": 0.01
+      }
+     ],
+     "button": {
+      "bg": "#f39430",
+      "hsl": {
+       "h": 31,
+       "s": 0.89,
+       "l": 0.57
+      },
+      "fg": "#381a04"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 1,
+     "inHero": 1,
+     "radius": 16,
+     "height": 56,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Nuevo cobro"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 1,
+     "hairlineSamples": [
+      "div.hero-stats 314px"
+     ],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 1,
+     "roundedBoxes": 2,
+     "boxRadius": 24,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 0,
+     "fixed": true,
+     "height": 64,
+     "floatingPill": false,
+     "blur": true
+    },
+    "fontsLoaded": [
+     "manrope"
+    ]
+   },
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "FAIL",
+   "id": "eyebrow",
+   "width": 1440,
+   "message": "1 eyebrow/kicker label(s) above headings: \"Total cobrado\" above \"$ 0,00\"",
+   "fix": "Delete them. If the label carried real information, fold it into the headline or the supporting sentence.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "micro-label",
+   "width": 1440,
+   "message": "1 tiny uppercase letter-spaced label(s): \"OCA\"",
+   "fix": "Prefer sentence case at body size.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "hairline",
+   "width": 1440,
+   "message": "1 thin rule(s)/divider line(s): div.hero-stats 592px",
+   "fix": "Delete. Separate with space, a tone change, or scale. Lines are only for real tables and form fields.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "few-pictures",
+   "width": 1440,
+   "message": "Only 0 picture(s) on the page (0 photographs, footage or raster images, 0 interface fragments). Drawings in SVG do not count.",
+   "fix": "Find real pictures of the subject's world with scripts/assets.mjs (photographs, archival images, maps, engravings, footage), download them to assets/ and give them room: a hero picture, one per section that has a subject, a full-width band. At least four, usually six to twelve."
+  },
+  {
+   "level": "WARN",
+   "id": "no-footage",
+   "width": 1440,
+   "message": "No video anywhere on the page.",
+   "fix": "Look for one honest clip with scripts/assets.mjs --video (the place, the material, the process) and use it as a muted loop with a poster frame. Defend its absence only if no clip fits the subject."
+  },
+  {
+   "level": "WARN",
+   "id": "small-text",
+   "width": 1440,
+   "message": "1 text block(s) under 13px.",
+   "fix": "Nothing meant to be read goes below 13px.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "focal-point",
+   "width": 1440,
+   "message": "The first screen has no dominant element: the largest type is 56px (3.9vw) and no single picture holds a third of the viewport.",
+   "fix": "Make one thing lead: the headline at display size, or one large picture. A grid of many small pictures is not one thing; in blind tests jurors marked a first screen without a headline down every time. On the strongest studied sites the largest type has a median of 8.4vw."
+  },
+  {
+   "level": "FAIL",
+   "id": "still-page",
+   "width": 1440,
+   "message": "Only 2 element(s) moved while the page loaded and scrolled.",
+   "fix": "Build the motion layer (SKILL.md step 9, references/motion.md): the signature move, an entrance for the parts of every section, feedback on every control, and one moving picture. Transform and opacity only, with a reduced-motion fallback."
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "C:\\Users\\cheli\\OneDrive\\Documentos\\PROGRAMACION\\app-Cobranzas-Oca\\app-cobranzas\\.taste-skill\\inspect\\desktop-fold.jpg",
+   "pages": [
+    "C:\\Users\\cheli\\OneDrive\\Documentos\\PROGRAMACION\\app-Cobranzas-Oca\\app-cobranzas\\.taste-skill\\inspect\\desktop-page-01.jpg"
+   ]
+  },
+  {
+   "viewport": "tablet",
+   "width": 768,
+   "fold": "C:\\Users\\cheli\\OneDrive\\Documentos\\PROGRAMACION\\app-Cobranzas-Oca\\app-cobranzas\\.taste-skill\\inspect\\tablet-fold.jpg",
+   "pages": [
+    "C:\\Users\\cheli\\OneDrive\\Documentos\\PROGRAMACION\\app-Cobranzas-Oca\\app-cobranzas\\.taste-skill\\inspect\\tablet-page-01.jpg"
+   ]
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "C:\\Users\\cheli\\OneDrive\\Documentos\\PROGRAMACION\\app-Cobranzas-Oca\\app-cobranzas\\.taste-skill\\inspect\\mobile-fold.jpg",
+   "pages": [
+    "C:\\Users\\cheli\\OneDrive\\Documentos\\PROGRAMACION\\app-Cobranzas-Oca\\app-cobranzas\\.taste-skill\\inspect\\mobile-page-01.jpg"
+   ]
+  }
+ ]
+}
