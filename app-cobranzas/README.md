@@ -34,15 +34,21 @@ Reemplazá los ejemplos por tus valores reales. `EMAIL_AUTORIZADO` debe coincidi
 ### Diagnósticos de Edge Functions en VS Code
 Instalá el CLI de Deno y la extensión oficial **Deno** (`denoland.vscode-deno`). La configuración del workspace activa Deno solo en `supabase/functions` para no interferir con el TypeScript de React/Vite. Después de instalar la extensión, recargá la ventana de VS Code.
 
-## 4. Envío automático a las 17:00 (Argentina = 20:00 UTC)
-Activá las extensiones `pg_cron` y `pg_net` (Database → Extensions) y ejecutá en SQL Editor:
+## 4. Envío automático configurable
+1. Aplicá `supabase/migrations/007_envio_automatico.sql` desde SQL Editor después de las migraciones anteriores.
+2. Desplegá la función `resumen-diario` actualizada.
+3. En **Destinatarios**, configurá el horario de Argentina y activá el envío automático. El resumen se envía de lunes a viernes a los destinatarios marcados como "Recibe". En **Historial** se conserva el botón **Enviar resumen ahora** para envíos manuales.
+
+La migración intenta reemplazar el cron diario `resumen-diario` existente por una comprobación cada minuto, conservando su URL y secreto. Si no había un cron previo, habilitá `pg_cron` y `pg_net` en Database → Extensions y creá el job en SQL Editor, reemplazando los valores:
 ```sql
-select cron.schedule('resumen-diario', '0 20 * * *', $$
+select cron.schedule('resumen-diario', '* * * * *', $$
   select net.http_post(
     url := 'https://TU_REF.supabase.co/functions/v1/resumen-diario',
-    headers := '{"Content-Type":"application/json","x-cron-secret":"un_secreto_largo"}'::jsonb,
-    body := '{}'::jsonb) $$);
+    headers := '{"Content-Type":"application/json","x-cron-secret":"TU_CRON_SECRET"}'::jsonb,
+    body := '{"automatico":true}'::jsonb) $$);
 ```
+
+`TU_CRON_SECRET` debe coincidir con `CRON_SECRET` configurado en los secretos de la Edge Function. Si necesitás crear uno nuevo, guardá el mismo valor en ambos lugares. Si el job existente no puede migrarse con seguridad, la migración falla sin reemplazarlo; revisá el cron y el formato de su comando antes de continuar.
 
 El resumen diario también incluye el tiempo de almuerzo y enlaces a las ubicaciones registradas al iniciar y finalizar. La app solicita permiso de ubicación y la captura solo funciona desde un contexto seguro HTTPS (o localhost en el mismo dispositivo); la URL HTTP de red local no permite usar geolocalización en un celular.
 

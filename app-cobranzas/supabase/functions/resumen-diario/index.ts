@@ -20,7 +20,8 @@ Deno.serve(async (req) => {
 
   // Autorización: viene del cron (secreto compartido) o del usuario autorizado (JWT)
   const secret = Deno.env.get('CRON_SECRET')
-  let ok = !!secret && req.headers.get('x-cron-secret') === secret
+  const esCron = !!secret && req.headers.get('x-cron-secret') === secret
+  let ok = esCron
   if (!ok) {
     const jwt = (req.headers.get('Authorization') ?? '').replace('Bearer ', '')
     const { data } = await db.auth.getUser(jwt)
@@ -29,7 +30,19 @@ Deno.serve(async (req) => {
   if (!ok) return json({ error: 'No autorizado' }, 401)
 
   const body = await req.json().catch(() => ({}))
-  const fecha: string = body.fecha ?? new Date().toLocaleDateString('en-CA', { timeZone: 'America/Argentina/Buenos_Aires' })
+  let fecha: string
+  if (body.automatico === true) {
+    if (!esCron) return json({ error: 'No autorizado para ejecutar el envío automático' }, 401)
+    const { data: fechaAutomatica, error: errorReclamo } = await db.rpc('reclamar_envio_resumen_automatico')
+    if (errorReclamo) {
+      console.error('No se pudo reclamar el envío automático:', errorReclamo.message)
+      return json({ error: 'No se pudo comprobar el horario automático' }, 500)
+    }
+    if (!fechaAutomatica) return json({ enviado: false, motivo: 'No corresponde enviar ahora' })
+    fecha = fechaAutomatica
+  } else {
+    fecha = body.fecha ?? new Date().toLocaleDateString('en-CA', { timeZone: 'America/Argentina/Buenos_Aires' })
+  }
   const ini = new Date(`${fecha}T00:00:00-03:00`)
   const a = ini.toISOString(), b = new Date(ini.getTime() + 864e5).toISOString()
 
