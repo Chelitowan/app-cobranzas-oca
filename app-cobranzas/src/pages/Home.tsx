@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { supabase, peso, hoyAR, rangoDia } from '../supabase'
 import type { Vista } from '../App'
-import { IconPen, IconHistory, IconMail, IconPlus, IconChevron } from '../icons'
+import Almuerzo from './Almuerzo'
 
 export default function Home({ ir }: { ir: (v: Vista) => void }) {
   const [total, setTotal] = useState(0)
@@ -19,49 +19,17 @@ export default function Home({ ir }: { ir: (v: Vista) => void }) {
 
   return (<>
     <div className="hero">
-      <div className="hero-top">
-        <span className="hero-date">{new Date(fecha + 'T12:00:00').toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric', month: 'long' })}</span>
-        <span className="hero-pill">Hoy</span>
-      </div>
-      <p className="hero-label">Total cobrado</p>
-      <div className="hero-total">{peso(total)}</div>
-      <div className="hero-stats">
-        <div className="stat"><b>{cobros}</b><span>cobros</span></div>
-        <span className="stat-sep" />
-        <div className="stat"><b>{gestiones}</b><span>gestiones</span></div>
-      </div>
+      <div className="fecha">{new Date(fecha + 'T12:00:00').toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric', month: 'long' })}</div>
+      <div>Total cobrado hoy</div>
+      <div className="total">{peso(total)}</div>
+      <div>{cobros} cobros · {gestiones} gestiones</div>
     </div>
-
-    <button className="cta" onClick={() => ir('cobro')}>
-      <IconPlus size={22} /> Nuevo cobro
-    </button>
-
-    <p className="section-title">Accesos rápidos</p>
-    <div className="menu">
-      <button className="menu-item" onClick={() => ir('gestion')}>
-        <span className="menu-ico"><IconPen /></span>
-        <span className="menu-text">
-          <span className="menu-title">Nueva gestión</span>
-          <span className="menu-sub">Llamada, depósito o visita</span>
-        </span>
-        <IconChevron size={18} />
-      </button>
-      <button className="menu-item" onClick={() => ir('historial')}>
-        <span className="menu-ico"><IconHistory /></span>
-        <span className="menu-text">
-          <span className="menu-title">Historial</span>
-          <span className="menu-sub">Cobros y gestiones del día</span>
-        </span>
-        <IconChevron size={18} />
-      </button>
-      <button className="menu-item" onClick={() => ir('destinatarios')}>
-        <span className="menu-ico"><IconMail /></span>
-        <span className="menu-text">
-          <span className="menu-title">Destinatarios</span>
-          <span className="menu-sub">Quién recibe el resumen diario</span>
-        </span>
-        <IconChevron size={18} />
-      </button>
+    <Almuerzo />
+    <button className="primario" onClick={() => ir('cobro')}>＋ Nuevo cobro</button>
+    <div className="grid">
+      <button className="tile" onClick={() => ir('gestion')}><span>📝</span>Nueva gestión</button>
+      <button className="tile" onClick={() => ir('historial')}><span>📋</span>Historial</button>
+      <button className="tile" onClick={() => ir('destinatarios')}><span>✉️</span>Destinatarios</button>
     </div>
   </>)
 }

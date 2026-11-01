@@ -1,14 +1,16 @@
 import { useState } from 'react'
 import { supabase, TIPOS_GESTION } from '../supabase'
-import { IconCheck } from '../icons'
+import { useClientesSugeridos, type Cliente } from '../useClientesSugeridos'
 
 export default function Gestion({ volver }: { volver: () => void }) {
   const [tipo, setTipo] = useState('')
   const [contacto, setContacto] = useState('')
+  const [cliente, setCliente] = useState<Cliente | null>(null)
   const [obs, setObs] = useState('')
   const [err, setErr] = useState('')
   const [ok, setOk] = useState(false)
   const [busy, setBusy] = useState(false)
+  const sugerencias = useClientesSugeridos(contacto)
 
   async function guardar() {
     setErr('')
@@ -16,43 +18,45 @@ export default function Gestion({ volver }: { volver: () => void }) {
     if (tipo === 'otros' && !obs.trim()) return setErr('Escribí una descripción de lo que hiciste')
     setBusy(true)
     const { error } = await supabase.from('gestiones').insert({
-      tipo, contacto: contacto.trim() || null, observaciones: obs.trim() || null, estado: 'realizada' })
+      tipo, cliente_id: cliente?.id ?? null, contacto: cliente ? null : contacto.trim() || null,
+      observaciones: obs.trim() || null, estado: 'realizada' })
     setBusy(false)
-    if (error) return setErr('No se pudo guardar la gestión')
+    if (error) return setErr(`No se pudo guardar la gestión: ${error.message}`)
     setOk(true)
   }
 
-  if (ok) return (
-    <div className="success">
-      <div className="success-ico"><IconCheck size={30} /></div>
-      <h2>Gestión registrada</h2>
-      <p className="muted">La gestión ya forma parte del resumen del día.</p>
-      <button className="cta" onClick={volver}>Volver al inicio</button>
-    </div>
-  )
-
+  if (ok) return (<><div className="ok">Gestión registrada</div><button onClick={volver}>Volver al inicio</button></>)
   return (<>
     <div className="card">
-      <h2>¿Qué hiciste?</h2>
+      <b>¿Qué hiciste?</b>
       <div className="opts">
         {Object.entries(TIPOS_GESTION).map(([k, v]) => (
           <button key={k} className={tipo === k ? 'opt on' : 'opt'} onClick={() => setTipo(k)}>{v}</button>
         ))}
       </div>
-      {!tipo && err && <div className="error">{err}</div>}
     </div>
-
-    {tipo && (
-      <div className="card">
-        <label>Cliente o contacto (opcional)
-          <input value={contacto} onChange={e => setContacto(e.target.value)} placeholder="Nombre o N° SAP" />
-        </label>
-        <label>{tipo === 'otros' ? 'Descripción de lo que hiciste' : 'Observaciones (opcional)'}
-          <textarea rows={4} value={obs} onChange={e => setObs(e.target.value)} placeholder="Detalle de la gestión" />
-        </label>
-        {err && <div className="error">{err}</div>}
-        <button className="cta" disabled={busy} onClick={guardar}>{busy ? 'Guardando…' : 'Guardar gestión'}</button>
-      </div>
-    )}
+    {tipo && (<div className="card">
+      <label>Cliente o contacto (opcional)<input value={contacto} autoComplete="off" onChange={e => {
+        setContacto(e.target.value)
+        setCliente(null)
+        setErr('')
+      }} /></label>
+      {sugerencias.buscando && <div className="sub" role="status">Buscando clientes…</div>}
+      {sugerencias.error && <div className="error">No se pudieron buscar clientes: {sugerencias.error}</div>}
+      {sugerencias.clientes.length > 0 && <div className="sugerencias" aria-label="Clientes sugeridos">
+        {sugerencias.clientes.map(c => <button type="button" key={c.id} className="suave" onClick={() => {
+          setCliente(c)
+          setContacto(c.nombre)
+        }}>
+          {c.nombre}{c.numero_sap && ` · SAP ${c.numero_sap}`}
+        </button>)}
+      </div>}
+      {cliente && <div className="sub">Cliente seleccionado: {cliente.nombre}{cliente.numero_sap && ` · SAP ${cliente.numero_sap}`}</div>}
+      <label>{tipo === 'otros' ? 'Descripción de lo que hiciste' : 'Observaciones (opcional)'}
+        <textarea rows={4} value={obs} onChange={e => setObs(e.target.value)} /></label>
+      {err && <div className="error">{err}</div>}
+      <button className="primario" disabled={busy} onClick={guardar}>Guardar gestión</button>
+    </div>)}
+    {!tipo && err && <div className="error">{err}</div>}
   </>)
 }

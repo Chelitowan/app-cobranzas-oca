@@ -1,3 +1,4 @@
+-- Esquema completo y final de App Cobranzas. Para un proyecto nuevo alcanza con ejecutar SOLO este archivo.
 -- Solo el usuario autorizado pasa las políticas RLS (se valida en la base, no en la UI)
 create or replace function public.es_autorizado() returns boolean
 language sql stable security definer set search_path = public as $$
@@ -18,15 +19,6 @@ create table clientes (
   creado_por uuid default auth.uid(), creado_en timestamptz not null default now(),
   actualizado_por uuid, actualizado_en timestamptz not null default now());
 
-create table facturas (
-  id uuid primary key default gen_random_uuid(),
-  cliente_id uuid not null references clientes(id),
-  numero text not null, monto_total numeric(14,2) not null,
-  estado text not null default 'pendiente' check (estado in ('pendiente','parcialmente pagada','pagada')),
-  emision date, vencimiento date,
-  creado_por uuid default auth.uid(), creado_en timestamptz not null default now(),
-  actualizado_por uuid, actualizado_en timestamptz not null default now());
-
 create table cobros (
   id uuid primary key default gen_random_uuid(),
   cliente_id uuid not null references clientes(id),
@@ -37,30 +29,34 @@ create table cobros (
   creado_por uuid default auth.uid(), creado_en timestamptz not null default now(),
   actualizado_por uuid, actualizado_en timestamptz not null default now());
 
+-- Varios cheques por cobro; todos los datos son opcionales salvo el monto
 create table cheques (
   id uuid primary key default gen_random_uuid(),
   cobro_id uuid not null references cobros(id),
-  numero text not null, banco text not null, titular text not null,
-  fecha_cobro date not null, monto numeric(14,2) not null,
+  numero text, banco text, titular text, fecha_cobro date,
+  monto numeric(14,2) not null, foto_path text,
   creado_por uuid default auth.uid(), creado_en timestamptz not null default now(),
   actualizado_por uuid, actualizado_en timestamptz not null default now());
 
+-- Facturas: solo se anota el número y si quedó pagada o con pago parcial
 create table cobro_factura (
   id uuid primary key default gen_random_uuid(),
   cobro_id uuid not null references cobros(id),
-  factura_id uuid not null references facturas(id),
-  monto_aplicado numeric(14,2) not null check (monto_aplicado > 0),
+  numero_factura text not null,
+  tipo text not null default 'pagada' check (tipo in ('pagada','parcial')),
+  monto_aplicado numeric(14,2),
   creado_por uuid default auth.uid(), creado_en timestamptz not null default now(),
   actualizado_por uuid, actualizado_en timestamptz not null default now());
 
 create table gestiones (
   id uuid primary key default gen_random_uuid(),
   cliente_id uuid references clientes(id), contacto text,
-  tipo text not null check (tipo in ('deposito','entrega_documentos','retiro_documentos','consulta_contacto','llamada','pendiente')),
+  tipo text not null check (tipo in ('deposito','gestion','retiro_documentacion','entrega_documentacion','otros')),
   observaciones text,
   estado text not null default 'realizada' check (estado in ('realizada','pendiente','anulada')),
   creado_por uuid default auth.uid(), creado_en timestamptz not null default now(),
-  actualizado_por uuid, actualizado_en timestamptz not null default now());
+  actualizado_por uuid, actualizado_en timestamptz not null default now(),
+  constraint gestiones_otros_desc check (tipo <> 'otros' or length(trim(coalesce(observaciones, ''))) > 0));
 
 create table destinatarios (
   id uuid primary key default gen_random_uuid(),
@@ -69,17 +65,18 @@ create table destinatarios (
   creado_por uuid default auth.uid(), creado_en timestamptz not null default now(),
   actualizado_por uuid, actualizado_en timestamptz not null default now());
 
+-- Si se elimina un destinatario, el envío ya hecho conserva su correo
 create table envios (
   id uuid primary key default gen_random_uuid(),
   fecha_envio timestamptz not null default now(),
-  destinatario_id uuid references destinatarios(id), destinatario_correo text,
+  destinatario_id uuid references destinatarios(id) on delete set null, destinatario_correo text,
   contenido text, estado text not null check (estado in ('enviado','error')), error text,
   creado_por uuid default auth.uid(), creado_en timestamptz not null default now(),
   actualizado_por uuid, actualizado_en timestamptz not null default now());
 
--- RLS en todas las tablas. Sin política de DELETE => no hay borrado físico
+-- RLS en todas las tablas: leer, crear y modificar. No hay borrado físico (se anula)...
 do $$ declare t text; begin
-  foreach t in array array['clientes','facturas','cobros','cheques','cobro_factura','gestiones','destinatarios','envios'] loop
+  foreach t in array array['clientes','cobros','cheques','cobro_factura','gestiones','destinatarios','envios'] loop
     execute format('alter table %I enable row level security', t);
     execute format('create policy "%1$s_sel" on %1$I for select to authenticated using (es_autorizado())', t);
     execute format('create policy "%1$s_ins" on %1$I for insert to authenticated with check (es_autorizado())', t);
@@ -88,10 +85,12 @@ do $$ declare t text; begin
   end loop;
 end $$;
 
--- Saldo de cada factura = total - lo aplicado por cobros no anulados
-create view facturas_saldo with (security_invoker = true) as
-select f.*, f.monto_total - coalesce((
-  select sum(cf.monto_aplicado) from cobro_factura cf join cobros c on c.id = cf.cobro_id
-  where cf.factura_id = f.id and c.estado <> 'anulado'), 0) as saldo
-from facturas f;
-grant select on facturas_saldo to authenticated;
+-- ...salvo los destinatarios, que sí se pueden eliminar desde la app
+create policy "destinatarios_del" on destinatarios for delete to authenticated using (es_autorizado());
+
+-- Fotos de cheques: almacenamiento privado, solo el usuario autorizado
+insert into storage.buckets (id, name, public) values ('cheques', 'cheques', false) on conflict (id) do nothing;
+create policy "cheques_fotos_sel" on storage.objects for select to authenticated
+  using (bucket_id = 'cheques' and public.es_autorizado());
+create policy "cheques_fotos_ins" on storage.objects for insert to authenticated
+  with check (bucket_id = 'cheques' and public.es_autorizado());

@@ -27,33 +27,31 @@ export default function Destinatarios() {
     await supabase.from('destinatarios').update({ activo: !d.recibe_resumen, recibe_resumen: !d.recibe_resumen }).eq('id', d.id)
     cargar()
   }
+  async function eliminar(d: D) {
+    if (!confirm(`¿Eliminar a ${d.nombre} (${d.correo})? Dejará de recibir el resumen.`)) return
+    setErr('')
+    const { data, error } = await supabase.from('destinatarios').delete().eq('id', d.id).select('id')
+    if (error || !data?.length) setErr('No se pudo eliminar el destinatario')
+    cargar()
+  }
 
   return (<>
-    <p className="hint">El resumen diario se envía a las personas marcadas como “Recibe”.</p>
-
-    {lista.length > 0 && (
-      <div className="card list">
-        {lista.map(d => (
-          <div key={d.id} className="list-item">
-            <span className="avatar">{d.nombre.slice(0, 1).toUpperCase()}</span>
-            <span className="pick-text">
-              <b>{d.nombre}</b>
-              <small>{d.correo}</small>
-            </span>
-            <button className={`pill ${d.recibe_resumen ? 'pill-on' : ''}`} onClick={() => alternar(d)}>
-              {d.recibe_resumen ? 'Recibe' : 'Pausado'}
-            </button>
-          </div>
-        ))}
+    <p className="sub">El resumen diario se envía a las personas que figuran como "Recibe".</p>
+    {lista.map(d => (
+      <div key={d.id} className="card">
+        <div><b>{d.nombre}</b><div className="sub">{d.correo}</div></div>
+        <div className="fila">
+          <button className={d.recibe_resumen ? 'chico' : 'chico suave'} onClick={() => alternar(d)}>{d.recibe_resumen ? 'Recibe' : 'Pausado'}</button>
+          <button className="chico peligro" onClick={() => eliminar(d)}>Eliminar</button>
+        </div>
       </div>
-    )}
-
+    ))}
     <div className="card">
-      <h2>Agregar destinatario</h2>
-      <label>Nombre<input value={nombre} onChange={e => setNombre(e.target.value)} placeholder="Nombre y apellido" /></label>
-      <label>Correo<input type="email" value={correo} onChange={e => setCorreo(e.target.value)} placeholder="nombre@oca.com.ar" /></label>
+      <b>Agregar destinatario</b>
+      <label>Nombre<input value={nombre} onChange={e => setNombre(e.target.value)} /></label>
+      <label>Correo<input type="email" value={correo} onChange={e => setCorreo(e.target.value)} /></label>
       {err && <div className="error">{err}</div>}
-      <button className="btn-soft" onClick={agregar}>Agregar destinatario</button>
+      <button onClick={agregar}>Agregar</button>
     </div>
   </>)
 }
