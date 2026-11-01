@@ -31,6 +31,9 @@ supabase functions deploy resumen-diario --no-verify-jwt
 ```
 Reemplazá los ejemplos por tus valores reales. `EMAIL_AUTORIZADO` debe coincidir con el correo autorizado en la base de datos y en `VITE_EMAIL_AUTORIZADO`. `SUPABASE_URL` y `SUPABASE_SERVICE_ROLE_KEY` los proporciona el runtime de Supabase; no los incluyas en el frontend. Probá con "Enviar resumen ahora" en Historial.
 
+### Diagnósticos de Edge Functions en VS Code
+Instalá el CLI de Deno y la extensión oficial **Deno** (`denoland.vscode-deno`). La configuración del workspace activa Deno solo en `supabase/functions` para no interferir con el TypeScript de React/Vite. Después de instalar la extensión, recargá la ventana de VS Code.
+
 ## 4. Envío automático a las 17:00 (Argentina = 20:00 UTC)
 Activá las extensiones `pg_cron` y `pg_net` (Database → Extensions) y ejecutá en SQL Editor:
 ```sql
