@@ -15,7 +15,7 @@ main { max-width: 560px; margin: 0 auto; padding: 14px 14px calc(28px + env(safe
 .almuerzo-tiempo { color: var(--m); font-size: 36px; font-variant-numeric: tabular-nums; font-weight: 800; text-align: center; }
 .hero { background: linear-gradient(135deg, var(--m), var(--m2)); color: #fff; border-radius: 18px; padding: 20px; display: grid; gap: 4px; }
 .hero .fecha { opacity: .85; text-transform: capitalize; }
-.hero .total { font-size: 34px; font-weight: 800; }
+.hero .total { color: #fff; font-size: 34px; font-weight: 800; }
 .total { font-size: 32px; font-weight: 800; color: var(--m); }
 .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .tile { background: #fff; color: var(--m2); border: 2px solid var(--b); border-radius: 16px; padding: 18px 8px; display: grid; gap: 4px; justify-items: center; font-size: 16px; }
